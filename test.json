@@ -1,0 +1,13 @@
+{
+    "ciao": null,
+    "ciaos": [
+        1,
+        2,
+        true,
+        {
+            "ciao": {
+                "bro" : [1,2,false]
+            }
+        }
+    ]
+}
