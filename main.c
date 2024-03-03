@@ -37,6 +37,7 @@ int main(int argc, char **argv)
     Lexer lexer = {0};
     lexer_init(&lexer, buffer.items);
     lex(&lexer);
+    // print_tokens(&lexer);
 
     Parser parser = {0};
     parser_init(&parser, &lexer);

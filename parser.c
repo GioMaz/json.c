@@ -51,18 +51,20 @@ Value *parse_array(Parser *parser)
     if (cur_type(parser) == TT_LSQUARE) {
         Array array;
         v_init(array);
-        do {
-            parser->pos++;
+        parser->pos++;
+        while (cur_type(parser) != TT_RSQUARE) {
             Value *value = parse_value(parser);
             v_append(array, value);
-        } while (cur_type(parser) == TT_COMMA);
-
-        if (cur_type(parser) == TT_RSQUARE) {
-            parser->pos++;
-        } else {
-            printf("Expected ']' at line %zu\n", cur_token(parser).line);
-            exit(1);
+            if (cur_type(parser) == TT_COMMA) {
+                parser->pos++;
+            } else if (cur_type(parser) == TT_RSQUARE) {
+            } else {
+                printf("Expected ']' at line %zu\n",
+                        cur_token(parser).line);
+                exit(1);
+            }
         }
+        parser->pos++;
 
         Value *value = malloc(sizeof(Value));
         AnyValue as = {
@@ -79,19 +81,13 @@ Value *parse_array(Parser *parser)
 Value *parse_object(Parser *parser)
 {
     if (cur_type(parser) == TT_LBRACE) {
+        parser->pos++;
         Object object;
         v_init(object);
-        do {
-            parser->pos++;
-            Token string = cur_token(parser);
-            if (cur_type(parser) == TT_STRING) {
-                parser->pos++;
-            } else {
-                printf("Expected string literal at line %zu\n",
-                        cur_token(parser).line);
-                exit(1);
-            }
+        while (cur_type(parser) != TT_RBRACE) {
 
+            Token string = cur_token(parser);
+            parser->pos++;
             if (cur_type(parser) == TT_COLON) {
                 parser->pos++;
             } else {
@@ -99,7 +95,6 @@ Value *parse_object(Parser *parser)
                         cur_token(parser).line);
                 exit(1);
             }
-
             Value *value = parse_value(parser);
 
             Member member = {
@@ -107,14 +102,17 @@ Value *parse_object(Parser *parser)
                 .value = value,
             };
             v_append(object, member);
-        } while (cur_type(parser) == TT_COMMA);
 
-        if (cur_type(parser) == TT_RBRACE) {
-            parser->pos++;
-        } else {
-            printf("Expected '}' at line %zu\n", cur_token(parser).line);
-            exit(1);
+            if (cur_type(parser) == TT_COMMA) {
+                parser->pos++;
+            } else if (cur_type(parser) == TT_RBRACE) {
+            } else {
+                printf("Expected '}' at line %zu\n",
+                        cur_token(parser).line);
+                exit(1);
+            }
         }
+        parser->pos++;
 
         Value *value = malloc(sizeof(Value));
         AnyValue as = {
