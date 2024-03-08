@@ -192,7 +192,7 @@ void lexer_init(Lexer *lexer, char *content)
     lexer->content = content;
 }
 
-void print_token(char *content, Token token)
+void print_token(char *content, const Token token)
 {
     switch (token.type) {
     case TT_LBRACE: printf("{"); break;
@@ -215,7 +215,7 @@ void print_token(char *content, Token token)
     }
 }
 
-void print_tokens(Lexer *lexer)
+void print_tokens(const Lexer *lexer)
 {
     for (size_t i = 0; i < lexer->size; i++) {
         print_token(lexer->content, lexer->items[i]);

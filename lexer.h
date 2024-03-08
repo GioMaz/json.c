@@ -48,7 +48,7 @@ void lex_number(Lexer *lexer);
 bool lex_token(Lexer *lexer);
 void lex(Lexer *lexer);
 void lexer_init(Lexer *lexer, char *content);
-void print_token(char *content, Token token);
-void print_tokens(Lexer *lexer);
+void print_token(char *content, const Token token);
+void print_tokens(const Lexer *lexer);
 
 #endif

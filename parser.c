@@ -136,14 +136,14 @@ Value *parse_json(Parser *parser)
     return parse_value(parser);
 }
 
-void print_member(Parser *parser, Member member)
+void print_member(const Parser *parser, const Member member)
 {
     print_token(parser->content, member.string);
     printf(":");
     print_value(parser, member.value);
 }
 
-void print_value(Parser *parser, Value *value)
+void print_value(const Parser *parser, const Value *value)
 {
     switch (value->type) {
 

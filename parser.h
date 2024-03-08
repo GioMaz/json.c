@@ -53,9 +53,8 @@ Value *parse_array(Parser *parser);
 Value *parse_object(Parser *parser);
 Value *parse_value(Parser *parser);
 Value *parse_json(Parser *parser);
-void print_value(Parser *parser, Value *value);
-void print_member(Parser *parser, Member member);
-void print_value(Parser *parser, Value *value);
+void print_member(const Parser *parser, const Member member);
+void print_value(const Parser *parser, const Value *value);
 void free_value(Value *value);
 
 #endif
