@@ -15,7 +15,7 @@
     do { \
         (_v).size = 0; \
         (_v).capacity = INIT_CAPACITY; \
-        (_v).items = malloc(sizeof(*(_v).items) * INIT_CAPACITY); \
+        (_v).items = malloc(INIT_CAPACITY * sizeof(*(_v).items)); \
     } while (0);
 
 #define v_append(_v, _item) \
