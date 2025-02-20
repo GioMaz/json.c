@@ -15,18 +15,18 @@ static int is_dir(const char *path)
 int main(int argc, char **argv)
 {
     if (argc < 2) {
-        printf("Usage: %s <file.json>\n", argv[0]);
+        fprintf(stderr, "Usage: %s <file.json>\n", argv[0]);
         exit(1);
     }
 
     if (is_dir(argv[1])) {
-        printf("%s: %s: Is a directory\n", argv[0], argv[1]);
+        fprintf(stderr, "%s: %s: Is a directory\n", argv[0], argv[1]);
         exit(1);
     }
 
     FILE *f = fopen(argv[1], "r");
     if (f == NULL) {
-        printf("%s: %s: No such file or directory\n", argv[0], argv[1]);
+        fprintf(stderr, "%s: %s: No such file or directory\n", argv[0], argv[1]);
         exit(1);
     }
 
@@ -37,7 +37,6 @@ int main(int argc, char **argv)
     Lexer lexer = {0};
     lexer_init(&lexer, buffer.items);
     lex(&lexer);
-    // print_tokens(&lexer);
 
     Parser parser = {0};
     parser_init(&parser, &lexer);

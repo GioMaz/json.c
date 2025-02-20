@@ -1,0 +1,21 @@
+json -> value
+
+value -> object
+    | array
+    | string
+    | number
+    | 'true'
+    | 'false'
+    | 'null'
+
+object -> '{' members '}'
+members -> member (',' members)?
+member -> string ':' value
+
+array -> '[' elements ']'
+elements -> element (',' elements)?
+element -> value
+
+string -> STRING
+
+number -> NUMBER

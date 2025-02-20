@@ -1,13 +1,16 @@
 CC=gcc
 CFLAGS=-Wall
 
+.INTERMEDIATE: main.o lexer.o parser.o
+
 all: main
 
-main: main.o parser.o lexer.o
-	$(CC) $(CLFAGS) -o main main.o parser.o lexer.o
+main: main.o lexer.o parser.o 
+	$(CC) $(CLFAGS) -o main main.o lexer.o parser.o
+
+test:
+	make -C ./tests test
 
 clean:
 	rm -rf *.o main
-
-run: main
-	./main test.json
+	make -C ./tests clean
