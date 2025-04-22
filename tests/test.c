@@ -28,7 +28,9 @@ void test(char *test_file)
 
     assert(value != NULL);
 
-    printf("Completed %s!\n", test_file);
+    fclose(f);
+
+    printf("Completed %s\n", test_file);
 }
 
 int main()
